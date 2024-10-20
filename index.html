@@ -73,25 +73,12 @@
             object-fit: cover;
             object-position: center;
             margin-bottom: 8px;
-            border: 5px solid red; /* 初期状態は赤い枠 */
-            z-index: 1; /* ビデオを手前に表示 */
+            z-index: 1;
         }
         .message {
             font-size: 1.2em;
             color: red;
             margin-bottom: 10px;
-        }
-        .face-frame {
-            position: absolute;
-            top: 110px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 180px;
-            height: 240px;
-            border: 3px solid white;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 2;
         }
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
@@ -103,7 +90,6 @@
         <div class="time"></div>
         <!-- 自己鏡映像 -->
         <video id="cameraStream" autoplay playsinline></video>
-        <div class="face-frame"></div> <!-- 顔を当てはめる楕円形の枠 -->
         <div class="message">顔を見てください</div>
         <div class="medication-info">
             <img src="https://github.com/Hikaru-M/medication-reminder/blob/main/capsule-1.jpg?raw=true" alt="薬の画像">
@@ -178,12 +164,10 @@
 
                     if (predictions.length > 0) {
                         // 顔が検出された場合の処理
-                        video.style.border = '5px solid lime';  // 緑の枠に変更
                         message.textContent = '服薬するか決めてください';
                         message.style.color = 'green';
                     } else {
                         // 顔が検出されなかった場合の処理
-                        video.style.border = '5px solid red';  // 赤い枠のまま
                         message.textContent = '顔を見てください';
                         message.style.color = 'red';
                     }
