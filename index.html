@@ -73,12 +73,25 @@
             object-fit: cover;
             object-position: center;
             margin-bottom: 8px;
+            border: 5px solid red; /* 初期状態は赤い枠 */
             z-index: 1;
         }
         .message {
             font-size: 1.2em;
             color: red;
             margin-bottom: 10px;
+        }
+        .face-frame {
+            position: absolute;
+            top: 110px; /* 顔枠を中央付近に表示 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 240px; /* 楕円形 */
+            border: 3px solid white; /* 白色の細い枠 */
+            border-radius: 50%; /* 楕円形にする */
+            pointer-events: none; /* 枠が操作を妨げない */
+            z-index: 2;
         }
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
@@ -90,6 +103,7 @@
         <div class="time"></div>
         <!-- 自己鏡映像 -->
         <video id="cameraStream" autoplay playsinline></video>
+        <div class="face-frame"></div> <!-- 顔を当てはめる楕円形の枠 -->
         <div class="message">顔を見てください</div>
         <div class="medication-info">
             <img src="https://github.com/Hikaru-M/medication-reminder/blob/main/capsule-1.jpg?raw=true" alt="薬の画像">
